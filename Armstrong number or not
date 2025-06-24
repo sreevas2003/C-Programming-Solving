@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<math.h>
+void main(){
+	int r,a,b,l,sum=0;
+	printf("Enter a Number:");
+	scanf("%d",&a);
+	l=a;
+  int c=0;
+  while(l){
+    c++;
+    l/=10;
+  }
+	b=a;
+	while(b){
+		r=b%10;
+		sum=sum+pow(r,c);
+		b/=10;
+	}
+	if(sum==a){
+		printf("%d is armstrong\n",a);
+	}
+	else{
+		printf("%d is Not armstrong\n",a);
+	}
+}
