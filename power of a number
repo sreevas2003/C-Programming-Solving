@@ -1,0 +1,12 @@
+#include<stdio.h>
+void main(){
+	int b,i,e,res=1;
+	printf("Enter base");
+	scanf("%d",&b);
+	printf("Enter expo");
+	scanf("%d",&e);
+	for(i=1;i<=e;i++){
+		res*=b;
+	}
+	printf("%d",res);
+}
