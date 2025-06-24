@@ -1,0 +1,24 @@
+//if-else method
+//ternary method
+#include<stdio.h>
+void main(){
+	int a,b,c,temp,max;
+	printf("Enter number 1:");
+	scanf("%d",&a);
+	printf("Enter number 2:");
+	scanf("%d",&b);
+	printf("Enter number 3:");
+	scanf("%d",&c);
+	if(a>=b && a>=c){
+		printf("Maximum is a %d\n",a);
+	}
+	else if(b>=c){
+		printf("Maximum is %d\n",b);
+	}
+	else{
+		printf("Maximum is %d\n",c);
+	}
+	temp=(a>b)?a:b;
+	max=(temp>c)?temp:c;
+	printf("Maximum is %d\n",max);
+}
