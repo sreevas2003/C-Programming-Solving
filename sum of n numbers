@@ -1,0 +1,27 @@
+//sum of natural numbers
+//sum of given range
+#include<stdio.h>
+void main()
+{
+	int a,c,b,i,sum=0;
+	printf("Enter a strating number");
+	scanf("%d",&c);
+	printf("Enter a Number");
+	scanf("%d",&a);
+	
+	//sum of given range
+	for(i=c;i<=a;i++)
+	{
+		sum=sum+i;
+	}
+	/*
+	b=a;
+	while(b)
+	{
+		sum=sum+b;
+		b--;
+	}
+	*/
+	printf("sum of %d numbers=%d\n",a,sum);
+}
+
