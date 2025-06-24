@@ -1,0 +1,19 @@
+//if-else method
+//ternary operator
+#include<stdio.h>
+void main(){
+	int a,b;
+	printf("Enter a Num1:");
+	scanf("%d",&a);
+	printf("Enter a Num2:");
+	scanf("%d",&b);
+	//if-else method
+	if(a>b){
+		printf("maximum is :%d\n",a);
+	}
+	else{
+		printf("maximum is :%d\n",b);
+	}
+	//ternary operator
+	(a>b)?printf("Maximum is :%d\n",a):printf("Maximum is :%d\n",b);
+}
