@@ -1,0 +1,23 @@
+#include<stdio.h>
+void main()
+{
+	int a;
+	printf("Enter a Number");
+	scanf("%d",&a);
+	if(a==0)
+	{
+		printf("This is zero");
+
+	}/*
+	else{
+		(a%2==0)?printf("Even\n"):printf("Odd\n");
+	}
+	*/
+	else if(a%2==0)
+	{
+		printf("Even\n");
+	}
+	else{
+		printf("Odd\n");
+	}
+}
