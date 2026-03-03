@@ -289,4 +289,151 @@ void main()
     }
 }
 ```
-## 
+## Q15. Check Anagram (Without Sorting Function)
+```c
+#include<stdio.h>
+#include<string.h>
+void main()
+{
+    char str1[]="listen";
+    char str2[]="silent";
+    int temp[256]={0};
+    int i=0;
+    while(str1[i] && str2[i])
+    {
+        temp[str1[i]]++;
+        temp[str2[i]]++;
+        i++;
+    }
+    i=0;
+    while(str1[i])
+    {
+        if(temp[str1[i]]!=2)
+        {
+            printf("Not anagrams\n");
+            return;
+        }
+        i++;
+    }
+    printf("Anagrams\n");
+    
+}
+```
+## Q16. Decimal to Binary (Without Built-in)
+```c
+#include<stdio.h>
+void main()
+{
+    int n=10,r=0,c=1,bin=0;
+    while(n)
+    {
+        
+        r=n%2;
+        bin+=r*c;
+        n/=2;
+        c*=10;
+        printf("%d\n",bin);
+    }
+    printf("%d\n",bin);
+}
+```
+## Q17. Armstrong Number (General Case)
+```c
+#include<stdio.h>
+#include<math.h>
+void main()
+{
+    int n=153;
+    int temp=n;
+    int c=0;
+    while(temp)
+    {
+        c++;
+        temp/=10;
+    }
+    temp=n;
+    int r,sum=0;
+    while(temp)
+    {
+        r=temp%10;
+        sum=sum+pow(r,c);
+        temp/=10;
+    }
+    if(n==sum)
+        printf("Armstrong\n");
+    else
+        printf("Not Armstrong\n");
+}
+```
+## Q18. Matrix Addition
+```c
+#include<stdio.h>
+void main()
+{
+    int a[2][2]={1,2,3,4},b[2][2]={4,3,2,1};
+    int i,j,c[2][2];
+    for(i=0;i<2;i++)
+    {
+        for(j=0;j<2;j++)
+        {
+            c[i][j]=a[i][j]+b[i][j];
+        }
+    }
+    for(i=0;i<2;i++)
+    {
+        for(j=0;j<2;j++)
+        {
+            printf("%d ",c[i][j]);
+        }
+    }
+}
+```
+## Q19. Transpose of Matrix
+```c
+#include<stdio.h>
+void main()
+{
+    int a[2][3]={1,2,3,4,5,6};
+    int i,j,c[3][2];
+    for(i=0;i<2;i++)
+    {
+        for(j=0;j<3;j++)
+        {
+            c[j][i]=a[i][j];
+        }
+    }
+    for(i=0;i<3;i++)
+    {
+        for(j=0;j<2;j++)
+        {
+            printf("%d ",c[i][j]);
+        }
+        printf("\n");
+    }
+}
+```
+## Q20. Strong Number
+```c
+#include<stdio.h>
+int fact(int n)
+{
+    if(n==1)
+        return n;
+    return n*fact(n-1);
+}
+void main()
+{
+    int num=145,sum=0;
+    int n=num;
+    while(n)
+    {
+        sum+=fact(n%10);
+        n/=10;
+    }
+    if(num==sum)
+        printf("Strong number\n");
+    else
+        printf("Not strong number\n");
+    
+}
+```
