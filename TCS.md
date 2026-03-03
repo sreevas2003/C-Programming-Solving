@@ -204,3 +204,89 @@ void main()
     printf("vowels count is %d\nconsonant count is %d",vowel,consonant);
 }
 ```
+## Frequency of elements in array
+```c
+#include<stdio.h>
+void main()
+{
+    int temp[10],arr[10]={1,2,5,4,1,2,6,3,4,3};
+    int i=0,c;
+    while(i<10)
+        temp[i++]=0;
+    for(i=0;i<10;i++)
+    {
+        if(temp[i]!=-1){
+        c=0;
+        for(int j=0;j<10;j++)
+        {
+            if(arr[i]==arr[j])
+            {
+                temp[j]=-1;
+                c++;
+            }
+        }
+        printf("%d times %d\n",arr[i],c);
+    }}
+}
+```
+## Sorting without library
+```c
+#include<stdio.h>
+void main()
+{
+    int arr[10]={1,2,5,4,1,2,6,3,4,3};
+    int i,j;
+    for(i=0;i<10;i++)
+    {
+        for(j=i;j<10;j++)
+        {
+            if(arr[i]>arr[j])
+            {
+                int temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+            }
+        }
+    }
+    for(i=0;i<10;i++)
+        printf("%d ",arr[i]);
+}
+```
+## Q13. Pattern Problem – Pyramid
+```c
+#include<stdio.h>
+void main()
+{
+    int i,j,k;
+    for(i=1;i<6;i++)
+    {
+        for(j=5;j>=i;j--)
+            printf(" ");
+        for(j=1;j<=i;j++)
+            printf("*");
+        for(j=1;j<i;j++)
+            printf("*");
+        printf("\n");
+    }
+}
+```
+## Q14. Sum of Digits Until Single Digit
+```c
+#include<stdio.h>
+void main()
+{
+    int n=9857;
+    while(n>=9)
+    {
+        int sum=0;
+        while(n)
+        {
+            sum=sum+n%10;
+            n/=10;
+        }
+        printf("%d\n",sum);
+        n=sum;
+    }
+}
+```
+## 
