@@ -437,3 +437,243 @@ void main()
     
 }
 ```
+## Q21. Find Missing Number (1 to N)
+```c
+#include<stdio.h>
+void main()
+{
+    int arr[]={1,2,3,5};
+    int n=sizeof(arr)/sizeof(arr[0]),arraysum=0,original=0,i;
+    for(i=0;i<n;i++)
+    {
+        arraysum+=arr[i];
+        original+=i+1;
+    }
+    original+=n+1;
+    printf("missing number is %d\n",original-arraysum);
+    
+}
+```
+## Q22. Find Majority Element (> n/2 times)
+```c
+#include<stdio.h>
+void main()
+{
+    int arr[]={2,2,1,2,3,2,2};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int i,cand,vote=0;
+    for(i=0;i<n;i++)
+    {
+        if(vote==0)
+        {
+            cand=arr[i];
+            vote=1;
+        }
+        else
+        {
+            if(cand==arr[i])
+                vote++;
+            else
+                vote--;
+        }
+    }
+    int count=0;
+    for(i=0;i<n;i++)
+    {
+        if(cand==arr[i])
+            count++;
+    }
+    if(count>=n/2)
+        printf("Candi is %d\n",cand);
+    else
+        printf("There is no element\n");
+    
+}
+```
+## Q23. Move All Zeros to End
+```c
+#include<stdio.h>
+void main()
+{
+    int arr[]={0,0,1,0,3,2,0};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int i,pos=0;
+    for(i=0;i<n;i++)
+    {
+        if(arr[i]!=0)
+            arr[pos++]=arr[i];
+    }
+    while(pos<n)
+    {
+        arr[pos++]=0;
+    }
+    for(i=0;i<n;i++)
+    {
+        printf("%d ",arr[i]);
+    }
+}
+```
+## Q24. Check if Array is Sorted
+```c
+#include<stdio.h>
+void main()
+{
+    int arr[]={1,3,3,4,5};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int i,flag=0;
+    for(i=1;i<n;i++)
+    {
+        if(arr[i]<arr[i-1])
+        {
+            flag=1;
+            break;
+        }
+    }
+    if(flag)
+        printf("Not sorted");
+    else
+        printf("Sorted array");
+}
+```
+## Q25. Find Duplicate Element
+```c
+#include<stdio.h>
+void main()
+{
+    int arr[]={1,3,2,4,1};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int i,j,cand=0;
+    for(i=0;i<n;i++)
+    {
+       for(j=i+1;j<n;j++)
+       {
+            if(arr[i]==arr[j])
+            {
+                cand=arr[i];
+                break;
+            }
+        }
+    }
+    printf("%d",cand);
+}
+```
+## Q26. Rotate Array by 1 Position
+```c
+#include<stdio.h>
+void main()
+{
+    int arr[]={1,2,3,4,5};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int i,k=1;
+    while(k)
+    {
+        int temp=arr[n-1];
+        for(i=n-1;i>=0;i--)
+        {
+            arr[i]=arr[i-1];
+        }
+        arr[0]=temp;
+        k--;
+    }
+    for(i=0;i<n;i++)
+        printf("%d ",arr[i]);
+}
+```
+## Q27. Reverse Words in String
+```c
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+void reverse(char str[],int i,int j)
+{
+    for(;i<=j;i++,j--)
+    {
+        char ch=str[i];
+        str[i]=str[j];
+        str[j]=ch;
+    }
+}
+void main()
+{
+    char str[]="i love tcs";
+    int i=0,n=strlen(str);
+    reverse(str,0,n-1);
+    while(str[i])
+    {
+        while(isspace(str[i]))
+            i++;
+        int l=i;
+        while(!isspace(str[i]) && str[i])
+            i++;
+        reverse(str,l,i-1);
+    }
+    puts(str);
+}
+```
+## Q28. Count Frequency of Characters
+```c
+#include<stdio.h>
+#include<string.h>
+void main()
+{
+    char str[]="programming";
+    int i=0,freq[256]={0},n=strlen(str);
+    while(str[i])
+    {
+        freq[str[i]]++;
+        i++;
+    }
+    i=0;
+    while(i<n)
+    {
+        if(freq[str[i]])
+        {
+            printf("%c -> %d\n",str[i],freq[str[i]]);
+            freq[str[i]]=0;
+        }
+        i++;
+        
+    }
+    
+}
+```
+## Q29. Find First Non-Repeating Character
+```c
+#include<stdio.h>
+#include<string.h>
+void main()
+{
+    char str[]="stress";
+    int i=0,freq[256]={0},n=strlen(str);
+    while(str[i])
+    {
+        freq[str[i]]++;
+        i++;
+    }
+    i=0;
+    while(i<n)
+    {
+        if(freq[str[i]]==1)
+        {
+            printf("%c\n",str[i]);
+            return;
+        }
+        i++;
+    }
+    
+}
+```
+## Q30. Swap Two Numbers Without Third Variable
+```c
+#include<stdio.h>
+void main()
+{
+    int a=10,b=5;
+    a^=b;
+    b^=a;
+    a^=b;
+    printf("%d and %d\n",a,b);
+}
+```
+
+
