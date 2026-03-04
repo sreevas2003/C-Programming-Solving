@@ -19,6 +19,24 @@ int main()
 ```
 ## Q2. Maximum Subarray Sum (Kadane’s Algorithm)
 ```c
+#include<stdio.h>
+void main()
+{
+    int arr[]={-2,1,-3,4,-1,2,1,-5,4};
+    int i,j,n=sizeof(arr)/sizeof(arr[0]);
+    int msum=0;
+    for(i=0;i<n;i++)
+    {
+        int sum=arr[i];
+        for(j=i+1;j<n;j++)
+        {
+            sum+=arr[j];
+            if(sum>msum)
+                msum=sum;
+        }
+    }
+    printf("%d",msum);
+}
 ```
 ## Q3. Maximum Sum Subarray of Size K (Sliding Window)
 ```c
