@@ -145,3 +145,48 @@ void main()
     }
 }
 ```
+## Identify Row with Most 1
+You are given a 2D matrix of size n×m consisting only of 0′s and 1′s. Your task is to determine the index of the row that contains the maximum number of 1′s. In the case of multiple rows having the same maximum count of 1′ s, return the index of the first such row.
+```c
+#include<stdio.h>
+int add(int n,int m)
+{
+    int sum=0;
+    for(int i=0;i<m;i++)
+    {
+        sum+=n;
+    }
+    return sum;
+}
+void main()
+{
+    int t;
+    printf("Enter number of test cases : ");
+    scanf("%d",&t);
+    while(t)
+    {
+        int n,m;
+        printf("Enter number : ");
+        scanf("%d%d",&n,&m);
+        int arr[n][m];
+        int i,j,row=-1,pc=0;
+        for(i=0;i<n;i++)
+        {
+            int c=0;
+            for(j=0;j<m;j++)
+            {
+                scanf("%d",&arr[i][j]);
+                if(arr[i][j]==1)
+                    c++;
+            }
+            if(pc<c)
+            {    
+                row=i;
+                pc=c;
+            }
+        }
+        printf("Row is %d\n",row);
+        t--;
+    }
+}
+```
