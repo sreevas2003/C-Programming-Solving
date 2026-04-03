@@ -556,24 +556,579 @@ int main() {
 
 ---
 
-# 🔥 Remaining (26–50)
-
-👉 Covers:
-
-* Lambda tricky cases
-* Move semantics traps
-* Reference vs pointer confusion
-* Const correctness
-* Static variables behavior
-* Multithreading edge cases
+# 📘 C++ – Tricky Output Questions (26–50)
 
 ---
 
-(If you want, I will expand 26–50 FULL like above — VERY HIGH VALUE 🔥)
+# 🔥 SECTION 5: STATIC, CONST & REFERENCES
+
+### 26.
+
+```cpp
+#include <iostream>
+using namespace std;
+void fun() {
+    static int x = 0;
+    x++;
+    cout << x << " ";
+}
+int main() {
+    fun(); fun(); fun();
+}
+```
+
+**Output:** 1 2 3
+
+* static retains value
+* Initialized once
+* Shared across calls
+* Stored in static memory
 
 ---
 
-# 🚀 FINAL INTERVIEW TIPS
+### 27.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    const int x = 10;
+    int *p = (int*)&x;
+    *p = 20;
+    cout << x;
+}
+```
+
+**Output:** Undefined Behavior
+
+* Modifying const object
+* Type casting used
+* Compiler may optimize
+* Avoid such code
+
+---
+
+### 28.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 10;
+    int &ref = x;
+    ref = 20;
+    cout << x;
+}
+```
+
+**Output:** 20
+
+* Reference alias
+* Same memory
+* Modification reflects
+* No new copy
+
+---
+
+### 29.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 5;
+    int &r = x;
+    int y = r;
+    y = 10;
+    cout << x;
+}
+```
+
+**Output:** 5
+
+* y is copy, not reference
+* r refers to x
+* y independent
+* x unchanged
+
+---
+
+### 30.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 5;
+    int &r = x;
+    int *p = &r;
+    cout << *p;
+}
+```
+
+**Output:** 5
+
+* Reference has address
+* Pointer can point to ref
+* Same memory
+* Works like normal variable
+
+---
+
+# 🔥 SECTION 6: ADVANCED POINTER TRICKS
+
+### 31.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int arr[] = {10,20,30};
+    int *p = arr;
+    cout << *(p + 2);
+}
+```
+
+**Output:** 30
+
+* Pointer arithmetic
+* p+2 → third element
+* Dereference
+* Array indexing logic
+
+---
+
+### 32.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int arr[] = {1,2,3,4};
+    int *p = arr;
+    cout << *p++ << " " << *p;
+}
+```
+
+**Output:** 1 2
+
+* Post increment
+* First prints 1
+* Then pointer moves
+* Next value 2
+
+---
+
+### 33.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 5;
+    int *p = &x;
+    cout << (*p)++;
+    cout << x;
+}
+```
+
+**Output:** 5 6
+
+* Post increment
+* Prints first
+* Then increments
+* Value updated
+
+---
+
+### 34.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 5;
+    int *p = &x;
+    cout << ++(*p);
+}
+```
+
+**Output:** 6
+
+* Pre increment
+* Value incremented first
+* Then printed
+* Direct modification
+
+---
+
+### 35.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 5;
+    int *p = &x;
+    int **q = &p;
+    cout << **q + 1;
+}
+```
+
+**Output:** 6
+
+* Double pointer
+* q → p → x
+* Access value
+* Add 1
+
+---
+
+# 🔥 SECTION 7: CONSTRUCTORS & OBJECT LIFETIME
+
+### 36.
+
+```cpp
+#include <iostream>
+using namespace std;
+class A {
+public:
+    A() { cout << "A "; }
+    ~A() { cout << "~A "; }
+};
+int main() {
+    A obj1;
+    {
+        A obj2;
+    }
+}
+```
+
+**Output:** A A ~A ~A
+
+* obj1 created first
+* obj2 created inside block
+* obj2 destroyed first
+* LIFO destruction
+
+---
+
+### 37.
+
+```cpp
+#include <iostream>
+using namespace std;
+class A {
+public:
+    A() { cout << "A "; }
+};
+A fun() {
+    A obj;
+    return obj;
+}
+int main() {
+    fun();
+}
+```
+
+**Output:** A
+
+* Copy elision
+* No extra copy
+* Optimization by compiler
+* Single constructor call
+
+---
+
+### 38.
+
+```cpp
+#include <iostream>
+using namespace std;
+class A {
+public:
+    A() { cout << "A "; }
+    A(const A&) { cout << "Copy "; }
+};
+int main() {
+    A obj1;
+    A obj2 = obj1;
+}
+```
+
+**Output:** A Copy
+
+* Copy constructor
+* Called on assignment
+* obj2 initialized
+* Deep/shallow depends
+
+---
+
+### 39.
+
+```cpp
+#include <iostream>
+using namespace std;
+class A {
+public:
+    A() { cout << "A "; }
+    ~A() { cout << "~A "; }
+};
+int main() {
+    A *p = new A();
+    delete p;
+}
+```
+
+**Output:** A ~A
+
+* Dynamic allocation
+* Constructor called
+* delete triggers destructor
+* Proper cleanup
+
+---
+
+### 40.
+
+```cpp
+#include <iostream>
+using namespace std;
+class A {
+public:
+    A() { cout << "A "; }
+};
+int main() {
+    A *p = new A[2];
+}
+```
+
+**Output:** A A
+
+* Array allocation
+* Constructor called twice
+* No delete[] used
+* Potential leak
+
+---
+
+# 🔥 SECTION 8: LAMBDA, AUTO, MOVE
+
+### 41.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    auto x = 5.5;
+    cout << typeid(x).name();
+}
+```
+
+**Output:** double (compiler dependent)
+
+* auto deduces type
+* Floating → double
+* Compile-time inference
+* Cleaner code
+
+---
+
+### 42.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    auto f = [](){ return 10; };
+    cout << f();
+}
+```
+
+**Output:** 10
+
+* Lambda function
+* Anonymous function
+* Called like normal
+* Inline definition
+
+---
+
+### 43.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 10;
+    auto f = [x]() { return x + 5; };
+    cout << f();
+}
+```
+
+**Output:** 15
+
+* Capture by value
+* Copy of x
+* No modification
+* Safe usage
+
+---
+
+### 44.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 10;
+    auto f = [&x]() { x += 5; return x; };
+    cout << f();
+}
+```
+
+**Output:** 15
+
+* Capture by reference
+* Modifies original x
+* Shared memory
+* Powerful feature
+
+---
+
+### 45.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    string s1 = "Hello";
+    string s2 = move(s1);
+    cout << s1 << " " << s2;
+}
+```
+
+**Output:** (empty) Hello
+
+* Move semantics
+* Ownership transferred
+* s1 becomes empty
+* s2 holds data
+
+---
+
+# 🔥 SECTION 9: MISC & EDGE CASES
+
+### 46.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 10;
+    cout << sizeof(x++);
+}
+```
+
+**Output:** 4
+
+* sizeof does not evaluate
+* No increment happens
+* Compile-time operator
+* x remains same
+
+---
+
+### 47.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 10;
+    cout << (true || x++);
+}
+```
+
+**Output:** 1
+
+* Short-circuit OR
+* x++ not executed
+* true || anything = true
+* x unchanged
+
+---
+
+### 48.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 10;
+    cout << (false && x++);
+}
+```
+
+**Output:** 0
+
+* Short-circuit AND
+* x++ not executed
+* false && anything = false
+* Safe evaluation
+
+---
+
+### 49.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 5;
+    cout << (x = 10) << " " << x;
+}
+```
+
+**Output:** 10 10
+
+* Assignment returns value
+* x updated
+* Expression result used
+* Important trap
+
+---
+
+### 50.
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 5;
+    cout << (x == 5) + (x == 5);
+}
+```
+
+**Output:** 2
+
+* true = 1
+* 1 + 1 = 2
+* Boolean arithmetic
+* Common trick
+
+---
+
+# 🚀 FINAL TIPS (VERY IMPORTANT)
+
+* Watch undefined behavior carefully
+* Focus on pointer increments
+* Understand object lifecycle deeply
+* Be strong in short-circuit logic
+
+---
+
 
 * Focus on undefined behavior
 * Be careful with increments
